@@ -35,7 +35,7 @@ class TokenMiddleware implements MiddlewareInterface
         if(!empty($token)) {
             $tokenExpire = false;
             try {
-                $message = TokenGenerator::verifyToken($token);
+                $message = TokenGenerator::verifyToken($token, config('jwt-key', ''));
             } catch (ExpiredException $e) {
                 $tokenExpire = true;
                 $message = [];

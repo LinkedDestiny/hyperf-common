@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Lib\Middleware;
 
-
 use Lib\Constants\ErrorCode;
 use Lib\Exception\BusinessException;
 use Psr\Http\Message\ResponseInterface;
