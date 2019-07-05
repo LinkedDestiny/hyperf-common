@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace Lib\Framework;
 
-use Hyperf\DbConnection\Model\Model as BaseModel;
+use Hyperf\DbConnection\Model\Model;
 
-class Model extends BaseModel
+class BaseModel extends Model
 {
     const CREATED_AT = 'create_at';
 
