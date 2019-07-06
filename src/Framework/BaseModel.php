@@ -19,13 +19,14 @@ class BaseModel extends Model
     /**
      * @param $key
      * @param $value
+     * @param array $field
      * @return Builder|static|object|null
      */
-    public static function findOne($key, $value)
+    public static function findOne($key, $value, $field = ['*'])
     {
         return self::query()
             ->where($key, $value)
-            ->first();
+            ->first($field);
     }
 
     public function insert(array $data)
