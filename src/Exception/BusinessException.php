@@ -16,7 +16,11 @@ class BusinessException extends ServerException
         if (is_null($message)) {
             $message = ErrorCode::getMessage($code);
         }
-
+        if (empty($message)) {
+            if (class_exists("\\App\\Constants\\ErrorCode")) {
+                $message = \App\Constants\ErrorCode::getMessage($code);
+            }
+        }
         parent::__construct($message, $code, $previous);
     }
 }
