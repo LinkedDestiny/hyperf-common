@@ -29,6 +29,18 @@ class BaseModel extends Model
             ->first($field);
     }
 
+    /**
+     * @param array $condition
+     * @param array $field
+     * @return Builder|static|object|null
+     */
+    public static function findOneCondition(array $condition, $field = ['*'])
+    {
+        return self::query()
+            ->where($condition)
+            ->first($field);
+    }
+
     public function insert(array $data)
     {
         $this->fill($data);

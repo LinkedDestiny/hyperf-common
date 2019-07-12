@@ -28,12 +28,17 @@
     "hyperf/redis": "~1.0.0",
     "hyperf/utils": "~1.0.0",
 
-    "coding-cat/common-helper": "~0.1"
+    "coding-cat/common-helper": "~0.1",
+
+    "alcaeus/mongo-php-adapter": "^1.0",
+    "ext-mongodb": "*",
+    "ext-json": "*"
   },
 
   "autoload": {
     "psr-4": {
-      "Lib\\": "src/"
+      "Lib\\": "src/",
+      "App\\": "app/"
     },
     "files": [
       "src/functions.php"
