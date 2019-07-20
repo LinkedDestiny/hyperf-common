@@ -40,18 +40,15 @@ class TaskAspect extends AbstractAspect
         if (isset($meta["class"][Task::class])) {
             return $server->task(null, -1, function () use ($proceedingJoinPoint) {
                 $result = $proceedingJoinPoint->process();
-                // 在调用后进行某些处理
                 return $result;
             });
         } else if (isset($meta["class"][AsyncTask::class])) {
             return $server->task(null, -1, function () use ($proceedingJoinPoint) {
                 $result = $proceedingJoinPoint->process();
-                // 在调用后进行某些处理
                 return $result;
             });
         } else {
             $result = $proceedingJoinPoint->process();
-            // 在调用后进行某些处理
             return $result;
         }
     }
