@@ -3,6 +3,7 @@
 
 namespace Lib\Middleware;
 
+use Hyperf\Utils\Context;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -26,7 +27,8 @@ class OptionsMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (strtoupper($request->getMethod()) == 'OPTIONS') {
-            return response()->response()
+            $response = Context::get(ResponseInterface::class);
+            return $response
                 ->withAddedHeader('Access-Control-Expose-Headers', '*')
                 ->withAddedHeader('Access-Control-Allow-Origin', '*')
                 ->withAddedHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')

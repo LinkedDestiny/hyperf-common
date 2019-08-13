@@ -8,6 +8,7 @@ namespace Lib\Exception\Handler;
 use Hyperf\Config\Annotation\Value;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
+use Lib\Exception\RuntimeException;
 use Lib\Framework\Http\Response;
 use Lib\Constants\ErrorCode;
 use Lib\Exception\BusinessException;

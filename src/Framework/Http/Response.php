@@ -61,6 +61,13 @@ class Response
         return $this;
     }
 
+    public function header(string $name, string $value)
+    {
+        $response = $this->response()->withAddedHeader($name, $value);
+        Context::set(PsrResponseInterface::class, $response);
+        return $this;
+    }
+
     /**
      * @return \Hyperf\HttpMessage\Server\Response
      */
