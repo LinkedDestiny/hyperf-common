@@ -41,10 +41,15 @@ class BaseModel extends Model
             ->first($field);
     }
 
-    public function insert(array $data)
+    public function insertData(array $data)
     {
         $this->fill($data);
+        return $this->save();
+    }
 
+    public function updateData(array $data)
+    {
+        $this->fill($data);
         return $this->save();
     }
 
