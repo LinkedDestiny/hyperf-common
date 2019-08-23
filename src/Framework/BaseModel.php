@@ -26,6 +26,7 @@ class BaseModel extends Model
     {
         return self::query()
             ->where($key, $value)
+            ->where('enable', 1)
             ->first($field);
     }
 
@@ -38,6 +39,7 @@ class BaseModel extends Model
     {
         return self::query()
             ->where($condition)
+            ->where('enable', 1)
             ->first($field);
     }
 
@@ -56,7 +58,7 @@ class BaseModel extends Model
     public function disable()
     {
         $this->fill([
-            'enable' => 1
+            'enable' => 0
         ]);
         return $this->save();
     }
