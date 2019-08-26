@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
 use Hyperf\HttpMessage\Server\Request;
-use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Utils\ApplicationContext;
 use Hyperf\Utils\Context;
 use Lib\Framework\Http\Response;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 if (! function_exists('isDev')) {
@@ -38,7 +38,7 @@ if (! function_exists('response')) {
      */
     function response()
     {
-        return Context::get(ResponseInterface::class);
+        return Context::get(PsrResponseInterface::class);
     }
 
 }
