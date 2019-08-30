@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace Lib\Framework;
 
-use App\Enum\Enums\ValidateType;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Utils\Context;
+use Lib\Enum\ValidateType;
 use Lib\Framework\Http\Response;
 use Lib\Constants\ErrorCode;
 use Lib\Exception\BusinessException;

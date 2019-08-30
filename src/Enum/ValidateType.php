@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Enum\Enums;
+namespace Lib\Enum;
 
 
 use Lib\Framework\BaseEnum;
