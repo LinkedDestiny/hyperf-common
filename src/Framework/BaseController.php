@@ -5,11 +5,14 @@ declare(strict_types=1);
 
 namespace Lib\Framework;
 
+use App\Enum\Enums\ValidateType;
 use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\Utils\Context;
 use Lib\Framework\Http\Response;
 use Lib\Constants\ErrorCode;
 use Lib\Exception\BusinessException;
 use Lib\Exception\RuntimeException;
+use Lib\Validator\Validator;
 use Psr\Container\ContainerInterface;
 
 abstract class BaseController
@@ -29,11 +32,21 @@ abstract class BaseController
      */
     protected $request;
 
+    /**
+     * @var Validator
+     */
+    protected $validator;
+
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
         $this->response = $container->get(Response::class);
         $this->request = $container->get(RequestInterface::class);
+
+        $this->validator = new Validator();
+
+        $this->validator->context(ValidateType::INSERT, [$this, 'validateInsert']);
+        $this->validator->context(ValidateType::UPDATE, [$this, 'validateUpdate']);
     }
 
     public function attribute($key, $defaultValue = null)
@@ -100,4 +113,30 @@ abstract class BaseController
         }
         return $enumClass::byValue($value);
     }
+
+    protected function validate(string $type)
+    {
+        $input = $this->request->all();
+
+        $result = $this->validator->validate($input, $type);
+
+        if($result->isNotValid()) {
+            throw new BusinessException(ErrorCode::INVALID_PARAMS, json_encode($result->getMessages()));
+        }
+
+        $input = $result->getValues();
+
+        Context::set('http.request.parsedData', $input);
+    }
+
+    public function validateInsert(Validator $validator)
+    {
+
+    }
+
+    public function validateUpdate(Validator $validator)
+    {
+
+    }
+
 }

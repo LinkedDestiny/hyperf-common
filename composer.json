@@ -28,7 +28,8 @@
     "hyperf/utils": "~1.0.0",
 
     "coding-cat/common-helper": "~0.1",
-    "ext-json": "*"
+    "ext-json": "*",
+    "particle/validator": "^2.3"
   },
 
   "autoload": {
