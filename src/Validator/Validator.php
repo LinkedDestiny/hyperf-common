@@ -6,6 +6,10 @@ namespace Lib\Validator;
 
 use Particle\Validator\Validator as DefaultValidator;
 
+/**
+ * @method Chain required($key, $name = null, $allowEmpty = false)
+ * @method Chain optional($key, $name = null, $allowEmpty = true)
+ */
 class Validator extends DefaultValidator
 {
     /**

@@ -47,6 +47,8 @@ abstract class BaseController
 
         $this->validator->context(ValidateType::INSERT, [$this, 'validateInsert']);
         $this->validator->context(ValidateType::UPDATE, [$this, 'validateUpdate']);
+
+        $this->initValidator();
     }
 
     public function attribute($key, $defaultValue = null)
