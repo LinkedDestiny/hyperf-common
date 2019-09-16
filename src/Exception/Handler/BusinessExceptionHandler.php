@@ -48,7 +48,7 @@ class BusinessExceptionHandler extends ExceptionHandler
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
         $request = $this->container->get(RequestInterface::class);
-        $header = $request->getHeaderLine('HTTP_ACCESS_CONTROL_REQUEST_HEADERS');
+        $header = $request->getHeaderLine('Access-Control-Request-Headers');
         if (empty($header)) {
             $header = '*';
         }
