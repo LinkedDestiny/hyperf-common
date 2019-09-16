@@ -26,13 +26,18 @@ class OptionsMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        $header = $request->getHeaderLine('HTTP_ACCESS_CONTROL_REQUEST_HEADERS');
+        if (empty($header)) {
+            $header = '*';
+        }
+
         if (strtoupper($request->getMethod()) == 'OPTIONS') {
             $response = Context::get(ResponseInterface::class);
             return $response
                 ->withAddedHeader('Access-Control-Expose-Headers', '*')
                 ->withAddedHeader('Access-Control-Allow-Origin', '*')
                 ->withAddedHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-                ->withAddedHeader('Access-Control-Allow-Headers', '*');
+                ->withAddedHeader('Access-Control-Allow-Headers', $header);
         }
 
         $response = $handler->handle($request);
@@ -40,6 +45,6 @@ class OptionsMiddleware implements MiddlewareInterface
             ->withAddedHeader('Access-Control-Expose-Headers', '*')
             ->withAddedHeader('Access-Control-Allow-Origin', '*')
             ->withAddedHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-            ->withAddedHeader('Access-Control-Allow-Headers', '*');
+            ->withAddedHeader('Access-Control-Allow-Headers', $header);
     }
 }

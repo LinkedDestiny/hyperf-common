@@ -8,7 +8,7 @@ namespace Lib\Exception\Handler;
 use Hyperf\Config\Annotation\Value;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Lib\Exception\RuntimeException;
+use Hyperf\HttpServer\Contract\RequestInterface;
 use Lib\Framework\Http\Response;
 use Lib\Constants\ErrorCode;
 use Lib\Exception\BusinessException;
@@ -47,10 +47,16 @@ class BusinessExceptionHandler extends ExceptionHandler
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
+        $request = $this->container->get(RequestInterface::class);
+        $header = $request->getHeaderLine('HTTP_ACCESS_CONTROL_REQUEST_HEADERS');
+        if (empty($header)) {
+            $header = '*';
+        }
+
         $this->response->header('Access-Control-Expose-Headers', '*');
         $this->response->header('Access-Control-Allow-Origin', '*');
         $this->response->header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-        $this->response->header('Access-Control-Allow-Headers', '*');
+        $this->response->header('Access-Control-Allow-Headers', $header);
 
         if ($throwable instanceof BusinessException) {
             $this->logger->warning(format_throwable($throwable));
