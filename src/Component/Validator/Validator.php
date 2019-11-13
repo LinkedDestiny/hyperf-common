@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Validator;
+namespace Lib\Component\Validator;
 
 use Particle\Validator\Validator as DefaultValidator;
 

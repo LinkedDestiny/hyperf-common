@@ -5,17 +5,17 @@ declare(strict_types=1);
 
 namespace Lib\Framework;
 
+use Psr\Http\Message\ResponseInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Utils\Context;
-use Lib\Enum\ValidateType;
 use Lib\Framework\Http\Response;
 use Lib\Constants\ErrorCode;
 use Lib\Exception\BusinessException;
 use Lib\Exception\RuntimeException;
-use Lib\Validator\Validator;
+use Lib\Component\Validator\Validator;
 use Psr\Container\ContainerInterface;
 
-abstract class BaseController
+class BaseController
 {
     /**
      * @var ContainerInterface
@@ -37,18 +37,18 @@ abstract class BaseController
      */
     protected $validator;
 
+    /**
+     * @var array
+     */
+    protected $validateContext = [];
+
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->response = $container->get(Response::class);
+        $this->response = $container->get(ResponseInterface::class);
         $this->request = $container->get(RequestInterface::class);
 
         $this->validator = new Validator();
-
-        $this->validator->context(ValidateType::INSERT, [$this, 'validateInsert']);
-        $this->validator->context(ValidateType::UPDATE, [$this, 'validateUpdate']);
-
-        $this->initValidator();
     }
 
     public function attribute($key, $defaultValue = null)
@@ -116,11 +116,17 @@ abstract class BaseController
         return $enumClass::byValue($value);
     }
 
-    protected function validate(string $type)
+    public function validate(callable $callback)
     {
-        $input = $this->request->all();
+        $name = $this->request->getPathInfo();
 
-        $result = $this->validator->validate($input, $type);
+        if(!isset($this->validateContext[$name])) {
+            $this->validator->context($name, function(Validator $context) use ($callback) {
+                call_user_func($callback, $context);
+            });
+        }
+
+        $result = $this->validator->validate($this->request->all(), $name);
 
         if($result->isNotValid()) {
             throw new BusinessException(ErrorCode::INVALID_PARAMS, json_encode($result->getMessages()));
@@ -130,20 +136,4 @@ abstract class BaseController
 
         Context::set('http.request.parsedData', $input);
     }
-
-    public function validateInsert(Validator $validator)
-    {
-
-    }
-
-    public function validateUpdate(Validator $validator)
-    {
-
-    }
-
-    public function initValidator()
-    {
-
-    }
-
 }

@@ -4,6 +4,9 @@
   "description": "Coding Cat Hyperf Skeleton",
 
   "require": {
+    "ext-json": "*",
+    "ext-pdo": "*",
+
     "hyperf/constants": "~1.1.0",
     "hyperf/cache": "~1.1.0",
     "hyperf/command": "~1.1.0",
@@ -28,7 +31,6 @@
     "hyperf/utils": "~1.1.0",
 
     "coding-cat/common-helper": "~0.1",
-    "ext-json": "*",
     "particle/validator": "^2.3"
   },
 

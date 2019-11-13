@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Validator\Rules;
+namespace Lib\Component\Validator\Rules;
 
 use Particle\Validator\Rule;
 

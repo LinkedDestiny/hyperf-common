@@ -1,37 +1,22 @@
 <?php
-
 declare(strict_types=1);
 
 
 namespace Lib\Framework\Http;
 
-use Hyperf\HttpMessage\Cookie\Cookie;
-use Hyperf\HttpServer\Contract\ResponseInterface;
+
 use Hyperf\Utils\Context;
-use Psr\Container\ContainerInterface;
+use Hyperf\HttpMessage\Cookie\Cookie;
+use Hyperf\HttpServer\Exception\Http\EncodingException;
+use Hyperf\Utils\Contracts\Arrayable;
+use Hyperf\Utils\Contracts\Jsonable;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
-class Response
+class Response extends \Hyperf\HttpServer\Response
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * @var ResponseInterface
-     */
-    protected $response;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-        $this->response = $container->get(ResponseInterface::class);
-    }
-
     public function success($data = [])
     {
-        return $this->response->json([
+        return $this->json([
             'code' => 0,
             'msg'  => '',
             'data' => empty($data) ? new \stdClass() : $data,
@@ -40,39 +25,41 @@ class Response
 
     public function fail($code, $message = '')
     {
-        return $this->response->json([
+        return $this->json([
             'code' => $code,
             'msg' => $message,
             'data'  => new \stdClass()
         ]);
     }
 
-    public function redirect($url, $status = 302)
-    {
-        return $this->response()
-            ->withAddedHeader('Location', (string) $url)
-            ->withStatus($status);
-    }
-
     public function cookie(Cookie $cookie)
     {
-        $response = $this->response()->withCookie($cookie);
+        $response = $this->withCookie($cookie);
         Context::set(PsrResponseInterface::class, $response);
         return $this;
     }
 
     public function header(string $name, string $value)
     {
-        $response = $this->response()->withAddedHeader($name, $value);
+        $response = $this->withAddedHeader($name, $value);
         Context::set(PsrResponseInterface::class, $response);
         return $this;
     }
 
-    /**
-     * @return \Hyperf\HttpMessage\Server\Response
-     */
-    public function response()
+    protected function toJson($data): string
     {
-        return Context::get(PsrResponseInterface::class);
+        if (is_array($data)) {
+            return json_encode($data, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        }
+
+        if ($data instanceof Jsonable) {
+            return (string) $data;
+        }
+
+        if ($data instanceof Arrayable) {
+            return json_encode($data->toArray(), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        }
+
+        throw new EncodingException('Error encoding response data to JSON.');
     }
 }
