@@ -30,8 +30,9 @@
     "hyperf/redis": "~1.1.0",
     "hyperf/utils": "~1.1.0",
 
-    "coding-cat/common-helper": "~0.1",
-    "particle/validator": "^2.3"
+    "coding-cat/common-helper": "dev-master",
+    "particle/validator": "^2.3",
+    "marc-mabe/php-enum": "v3.0.2"
   },
 
   "autoload": {
