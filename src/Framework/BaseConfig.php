@@ -5,7 +5,7 @@ namespace Lib\Framework;
 
 use Common\Helper\ArrayHelper;
 use Lib\Exception\RuntimeException;
-use Xes\SDK\Common\Contracts\Traits\ArrayTrait;
+use Lib\Contracts\Traits\ArrayTrait;
 
 class BaseConfig
 {

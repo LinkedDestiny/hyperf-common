@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Xes\SDK\Common\Contracts\Traits;
+namespace Lib\Contracts\Traits;
 
 use ReflectionProperty;
 use Lib\Component\PhpDocReader;
