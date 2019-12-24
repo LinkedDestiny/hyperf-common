@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Lib\Framework;
+namespace CC\Hyperf\Common\Framework;
 
 use Common\Helper\ArrayHelper;
-use Lib\Exception\RuntimeException;
-use Lib\Contracts\Traits\ArrayTrait;
+use CC\Hyperf\Common\Exception\RuntimeException;
+use CC\Hyperf\Common\Contracts\Traits\ArrayTrait;
 
 class BaseConfig
 {

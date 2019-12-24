@@ -5,7 +5,7 @@ use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
 use Hyperf\HttpMessage\Server\Request;
 use Hyperf\Utils\ApplicationContext;
 use Hyperf\Utils\Context;
-use Lib\Framework\Http\Response;
+use CC\Hyperf\Common\Framework\Http\Response;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

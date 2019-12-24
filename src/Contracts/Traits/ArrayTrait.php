@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Lib\Contracts\Traits;
+namespace CC\Hyperf\Common\Contracts\Traits;
 
 use ReflectionProperty;
-use Lib\Component\PhpDocReader;
+use CC\Hyperf\Common\Component\PhpDocReader;
 
 trait ArrayTrait
 {

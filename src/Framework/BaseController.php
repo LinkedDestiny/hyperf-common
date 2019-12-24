@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 
-namespace Lib\Framework;
+namespace CC\Hyperf\Common\Framework;
 
 use Psr\Http\Message\ResponseInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Utils\Context;
-use Lib\Framework\Http\Response;
-use Lib\Constants\ErrorCode;
-use Lib\Exception\BusinessException;
-use Lib\Exception\RuntimeException;
-use Lib\Component\Validator\Validator;
+use CC\Hyperf\Common\Framework\Http\Response;
+use CC\Hyperf\Common\Constants\Error;
+use CC\Hyperf\Common\Exception\BusinessException;
+use CC\Hyperf\Common\Exception\RuntimeException;
+use CC\Hyperf\Common\Component\Validator\Validator;
 use Psr\Container\ContainerInterface;
 
 class BaseController
@@ -53,8 +53,7 @@ class BaseController
 
     public function attribute($key, $defaultValue = null)
     {
-        $value = $this->request->getAttribute($key, $defaultValue);
-        return $value;
+        return $this->request->getAttribute($key, $defaultValue);
     }
 
     /**
@@ -65,7 +64,7 @@ class BaseController
     protected function required($key) {
         $value = $this->request->input($key, null);
         if ($value === null) {
-            throw new BusinessException(ErrorCode::INVALID_PARAMS);
+            throw new BusinessException(Error::INVALID_PARAMS);
         }
         return $value;
     }
@@ -77,8 +76,7 @@ class BaseController
      * @throws BusinessException
      */
     protected function optional($key, $defaultValue = null) {
-        $value = $this->request->input($key, $defaultValue);
-        return $value;
+        return $this->request->input($key, $defaultValue);
     }
 
     /**
@@ -111,7 +109,7 @@ class BaseController
         }
         $value = $this->request->input($key, null);
         if ($value === null) {
-            throw new BusinessException(ErrorCode::INVALID_PARAMS);
+            throw new BusinessException(Error::INVALID_PARAMS);
         }
         return $enumClass::byValue($value);
     }
@@ -129,7 +127,7 @@ class BaseController
         $result = $this->validator->validate($this->request->all(), $name);
 
         if($result->isNotValid()) {
-            throw new BusinessException(ErrorCode::INVALID_PARAMS, json_encode($result->getMessages()));
+            throw new BusinessException(Error::INVALID_PARAMS, json_encode($result->getMessages()));
         }
 
         $input = $result->getValues();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Component;
+namespace CC\Hyperf\Common\Component;
 
 use Reflector;
 use ReflectionClass;

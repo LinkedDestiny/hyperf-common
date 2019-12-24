@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Component\Log;
+namespace CC\Hyperf\Common\Component\Log;
 
 use Hyperf\Logger\LoggerFactory as HyperfLoggerFactory;
 use Psr\Container\ContainerInterface;

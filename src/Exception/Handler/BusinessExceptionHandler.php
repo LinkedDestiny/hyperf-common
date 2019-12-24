@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 
-namespace Lib\Exception\Handler;
+namespace CC\Hyperf\Common\Exception\Handler;
 
 use Hyperf\Config\Annotation\Value;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpServer\Contract\RequestInterface;
-use Lib\Framework\Http\Response;
-use Lib\Constants\ErrorCode;
-use Lib\Exception\BusinessException;
+use CC\Hyperf\Common\Framework\Http\Response;
+use CC\Hyperf\Common\Constants\Error;
+use CC\Hyperf\Common\Exception\BusinessException;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -71,7 +71,7 @@ class BusinessExceptionHandler extends ExceptionHandler
         if (isDev()) {
             $message = format_throwable($throwable);
         }
-        return $this->response->fail(ErrorCode::SERVER_ERROR, $message);
+        return $this->response->fail(Error::SERVER_ERROR, $message);
     }
 
     public function isValid(Throwable $throwable): bool

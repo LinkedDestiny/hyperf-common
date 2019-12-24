@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace Lib\Component\Validator\Rules;
+namespace CC\Hyperf\Common\Component\Validator\Rules;
 
-use Lib\Exception\RuntimeException;
-use Lib\Framework\BaseEnum;
+use CC\Hyperf\Common\Exception\RuntimeException;
+use CC\Hyperf\Common\Framework\BaseEnum;
 use Particle\Validator\Rule;
 
 class EnumClass extends Rule

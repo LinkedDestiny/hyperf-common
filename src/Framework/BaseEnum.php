@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Lib\Framework;
+namespace CC\Hyperf\Common\Framework;
 
 use Hyperf\Constants\ConstantsCollector;
 use MabeEnum\Enum;

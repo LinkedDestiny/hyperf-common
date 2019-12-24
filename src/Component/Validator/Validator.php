@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Component\Validator;
+namespace CC\Hyperf\Common\Component\Validator;
 
 use Particle\Validator\Validator as DefaultValidator;
 

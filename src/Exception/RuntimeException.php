@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Exception;
+namespace CC\Hyperf\Common\Exception;
 
 use Hyperf\Server\Exception\ServerException;
 

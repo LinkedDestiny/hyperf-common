@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace Lib\Framework;
+namespace CC\Hyperf\Common\Framework;
 
 
 use Hyperf\HttpServer\Contract\RequestInterface;
-use Lib\Framework\Http\Response;
+use CC\Hyperf\Common\Framework\Http\Response;
 use Psr\Container\ContainerInterface;
 
 class BaseService

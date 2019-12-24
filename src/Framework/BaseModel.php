@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Framework;
+namespace CC\Hyperf\Common\Framework;
 
 use Hyperf\Database\Model\Builder;
 use Hyperf\DbConnection\Model\Model;

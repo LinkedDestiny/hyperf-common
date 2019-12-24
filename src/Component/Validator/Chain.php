@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace Lib\Component\Validator;
+namespace CC\Hyperf\Common\Component\Validator;
 
-use Lib\Component\Validator\Rules\IP;
-use Lib\Component\Validator\Rules\Each;
-use Lib\Component\Validator\Rules\EnumClass;
+use CC\Hyperf\Common\Component\Validator\Rules\IP;
+use CC\Hyperf\Common\Component\Validator\Rules\Each;
+use CC\Hyperf\Common\Component\Validator\Rules\EnumClass;
 use Particle\Validator\Chain as DefaultChain;
 
 class Chain extends DefaultChain

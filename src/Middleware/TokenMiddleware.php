@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Middleware;
+namespace CC\Hyperf\Common\Middleware;
 
 use Common\Helper\TokenGenerator;
 use Firebase\JWT\ExpiredException;
@@ -48,10 +48,7 @@ class TokenMiddleware implements MiddlewareInterface
             $request = $request->withAttribute('message', $message);
 
             Context::set(ServerRequestInterface::class, $request);
-
-            //Context::set($request);
         }
-        $response = $handler->handle($request);
-        return $response;
+        return $handler->handle($request);
     }
 }

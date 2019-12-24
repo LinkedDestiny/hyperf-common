@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Component\Commands\Ast;
+namespace CC\Hyperf\Common\Component\Commands\Ast;
 
 use PhpParser\Comment\Doc;
 use PhpParser\Node;

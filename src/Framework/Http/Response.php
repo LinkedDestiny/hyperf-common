@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Framework\Http;
+namespace CC\Hyperf\Common\Framework\Http;
 
 
 use Hyperf\Utils\Context;

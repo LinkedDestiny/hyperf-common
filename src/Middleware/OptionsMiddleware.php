@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Lib\Middleware;
+namespace CC\Hyperf\Common\Middleware;
 
 use Hyperf\Utils\Context;
 use Psr\Http\Message\ResponseInterface;
@@ -11,7 +11,7 @@ use Psr\Http\Server\MiddlewareInterface;
 
 /**
  * Class OptionsMiddleware
- * @package Lib\Middleware
+ * @package CC\Hyperf\Common\Middleware
  */
 class OptionsMiddleware implements MiddlewareInterface
 {
@@ -31,20 +31,19 @@ class OptionsMiddleware implements MiddlewareInterface
             $header = '*';
         }
 
-        if (strtoupper($request->getMethod()) == 'OPTIONS') {
-            $response = Context::get(ResponseInterface::class);
-            return $response
-                ->withAddedHeader('Access-Control-Expose-Headers', '*')
-                ->withAddedHeader('Access-Control-Allow-Origin', '*')
-                ->withAddedHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-                ->withAddedHeader('Access-Control-Allow-Headers', $header);
-        }
-
-        $response = $handler->handle($request);
-        return $response
-            ->withAddedHeader('Access-Control-Expose-Headers', '*')
+        // 设置跨域
+        $response = Context::get(ResponseInterface::class);
+        $response->withAddedHeader('Access-Control-Expose-Headers', '*')
             ->withAddedHeader('Access-Control-Allow-Origin', '*')
             ->withAddedHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
             ->withAddedHeader('Access-Control-Allow-Headers', $header);
+        Context::set(ResponseInterface::class, $response);
+
+        if (strtoupper($request->getMethod()) == 'OPTIONS') {
+            return $response;
+        }
+
+        $response = $handler->handle($request);
+        return $response;
     }
 }

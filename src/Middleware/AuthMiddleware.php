@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace Lib\Middleware;
+namespace CC\Hyperf\Common\Middleware;
 
-use Lib\Constants\ErrorCode;
-use Lib\Exception\BusinessException;
+use CC\Hyperf\Common\Constants\Error;
+use CC\Hyperf\Common\Exception\BusinessException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -30,12 +30,11 @@ class AuthMiddleware implements MiddlewareInterface
         if (empty($userId)) {
             $tokenExpire = $request->getAttribute('token_expire');
             if ($tokenExpire) {
-                throw new BusinessException(ErrorCode::TOKEN_EXPIRE);
+                throw new BusinessException(Error::TOKEN_EXPIRE);
             } else {
-                throw new BusinessException(ErrorCode::INVALID_TOKEN);
+                throw new BusinessException(Error::INVALID_TOKEN);
             }
         }
-        $response = $handler->handle($request);
-        return $response;
+        return $handler->handle($request);
     }
 }

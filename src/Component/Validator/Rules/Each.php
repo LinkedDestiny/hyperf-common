@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace Lib\Component\Validator\Rules;
+namespace CC\Hyperf\Common\Component\Validator\Rules;
 
 
 use Particle\Validator\Rule;
-use Lib\Component\Validator\Validator;
+use CC\Hyperf\Common\Component\Validator\Validator;
 use Particle\Validator\ValidationResult;
 
 class Each extends Rule
