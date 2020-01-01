@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace CC\Hyperf\Common\Framework;
 
+use Lib\Constants\SoftDeleted;
 use Hyperf\Database\Model\Builder;
 use Hyperf\DbConnection\Model\Model;
 
@@ -26,7 +27,7 @@ class BaseModel extends Model
     {
         return self::query()
             ->where($key, $value)
-            ->where('enable', 1)
+            ->where('enable', SoftDeleted::ENABLE)
             ->first($field);
     }
 
@@ -39,7 +40,7 @@ class BaseModel extends Model
     {
         return self::query()
             ->where($condition)
-            ->where('enable', 1)
+            ->where('enable', SoftDeleted::ENABLE)
             ->first($field);
     }
 
@@ -58,7 +59,7 @@ class BaseModel extends Model
     public function disable()
     {
         $this->fill([
-            'enable' => 0
+            'enable' => SoftDeleted::DISABLE
         ]);
         return $this->save();
     }
