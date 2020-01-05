@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Lib\Constants;
+namespace CC\Hyperf\Common\Constants;
 
 
 use CC\Hyperf\Common\Framework\BaseEnum;

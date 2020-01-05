@@ -1,13 +1,11 @@
 <?php
-
 declare(strict_types=1);
-
 
 namespace CC\Hyperf\Common\Framework;
 
-use Lib\Constants\SoftDeleted;
 use Hyperf\Database\Model\Builder;
 use Hyperf\DbConnection\Model\Model;
+use CC\Hyperf\Common\Constants\SoftDeleted;
 
 class BaseModel extends Model
 {
