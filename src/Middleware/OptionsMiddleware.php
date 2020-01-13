@@ -33,7 +33,7 @@ class OptionsMiddleware implements MiddlewareInterface
 
         // 设置跨域
         $response = Context::get(ResponseInterface::class);
-        $response->withAddedHeader('Access-Control-Expose-Headers', '*')
+        $response = $response->withAddedHeader('Access-Control-Expose-Headers', '*')
             ->withAddedHeader('Access-Control-Allow-Origin', '*')
             ->withAddedHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
             ->withAddedHeader('Access-Control-Allow-Headers', $header);
