@@ -47,17 +47,6 @@ class BusinessExceptionHandler extends ExceptionHandler
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
-        $request = $this->container->get(RequestInterface::class);
-        $header = $request->getHeaderLine('Access-Control-Request-Headers');
-        if (empty($header)) {
-            $header = '*';
-        }
-
-        $this->response->header('Access-Control-Expose-Headers', '*');
-        $this->response->header('Access-Control-Allow-Origin', '*');
-        $this->response->header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-        $this->response->header('Access-Control-Allow-Headers', $header);
-
         if ($throwable instanceof BusinessException) {
             $this->logger->warning(format_throwable($throwable));
             if (isDev()) {
