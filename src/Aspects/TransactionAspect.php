@@ -28,14 +28,10 @@ class TransactionAspect extends AbstractAspect
      */
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
-        try {
-            Db::beginTransaction();
-            $result = $proceedingJoinPoint->process();
-            Db::commit();
-            return $result;
-        } catch (\Throwable $e) {
-            Db::rollBack();
-            throw $e;
-        }
+        return Db::transaction(
+            function () use ($proceedingJoinPoint) {
+                return $proceedingJoinPoint->process();
+            }
+        );
     }
 }
