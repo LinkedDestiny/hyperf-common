@@ -32,7 +32,7 @@
         "coding-cat/common-helper": "~0.1",
 
         "particle/validator": "^2.3",
-        "marc-mabe/php-enum": "v3.0.2"
+        "marc-mabe/php-enum": "~4.0"
     },
   
     "autoload": {
