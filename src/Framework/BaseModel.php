@@ -56,9 +56,7 @@ class BaseModel extends Model
 
     public function disable()
     {
-        $this->fill([
-            'enable' => SoftDeleted::DISABLE
-        ]);
+        $this->enable = SoftDeleted::DISABLE;
         return $this->save();
     }
 
